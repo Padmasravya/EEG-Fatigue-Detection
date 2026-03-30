@@ -1,28 +1,3 @@
-"""
-================================================
-EEG FATIGUE DETECTION — TRAINING PIPELINE
-================================================
-Dataset  : EEG Driver Drowsiness (Figshare 14273687)
-          2022 trials × 30 channels × 384 samples @ 128Hz
-          substate: 0=alert, 1=drowsy
-Channels : FC5 (idx 7), C3 (idx 12), CP5 (idx 17)
-           Selected by fatigue index discrimination analysis
-
-Filters applied (biosignal standard):
-  1. DC removal         — zero-mean per trial
-  2. Bandpass filter    — 0.5–45 Hz Butterworth 4th order
-  3. Notch filter       — 50 Hz (power line noise)
-
-Features extracted per channel:
-  - Band power: delta(0.5-4), theta(4-8),
-                alpha(8-13), beta(13-30), gamma(30-45)
-  - Fatigue index: theta / (alpha + beta)
-  - Alpha/theta ratio
-
-Classifier: SVM (RBF kernel) — best F1 on this dataset
-================================================
-"""
-
 import sys, os, json
 import numpy as np
 import scipy.io
